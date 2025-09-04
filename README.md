@@ -1,14 +1,14 @@
-# MMBERT: A Modern Multilingual Encoder with Annealed Language Learning
+# mmBERT: A Modern Multilingual Encoder with Annealed Language Learning
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Paper](https://img.shields.io/badge/Paper-Arxiv-red)](https://arxiv.org/abs/2507.11412)
 [![mmBERT Collection](https://img.shields.io/badge/🤗%20Hugging%20Face-2%20Models-blue)](https://huggingface.co/collections/jhu-clsp/mmbert-a-modern-multilingual-encoder-68b725831d7c6e3acc435ed4)
 
-> 🌍 **TL;DR**: State-of-the-art multilingual encoder models (140M-307M params) trained on 3T tokens across 1833 languages with novel annealed language learning. Outperforms XLM-R and beats OpenAI o3 and Gemini 2.5 Pro on low-resource languages.
+> 🌍 **TL;DR**: State-of-the-art multilingual encoder models trained on 3T tokens across 1833 languages with novel annealed language learning. Outperforms XLM-R and beats OpenAI o3 and Gemini 2.5 Pro on low-resource languages.
 
 📄 [Paper](https://arxiv.org/abs/2507.11412) | 🤗 [Model Collection](https://huggingface.co/collections/jhu-clsp/mmbert-a-modern-multilingual-encoder-68b725831d7c6e3acc435ed4) | 📊 [Training Data](https://huggingface.co/datasets/jhu-clsp/mmbert-pretrain-p1-fineweb2-langs)
 
-MMBERT introduces the first modern multilingual encoder trained with cascading annealed language learning (ALL), progressively incorporating 1833 languages during training. With novel inverse masking schedules and high-quality multilingual data, MMBERT significantly outperforms previous multilingual encoders while achieving remarkable efficiency improvements.
+mmBERT introduces the first modern multilingual encoder trained with cascading annealed language learning (ALL), progressively incorporating 1833 languages during training. With novel inverse masking schedules and high-quality multilingual data, mmBERT significantly outperforms previous multilingual encoders while achieving remarkable efficiency improvements (up to 4x faster).
 
 ## Table of Contents
 - [Quick Start](#-quick-start)
@@ -16,7 +16,6 @@ MMBERT introduces the first modern multilingual encoder trained with cascading a
 - [Getting Started](#-getting-started)
 - [Training and Evaluation](#-training-and-evaluation)
 - [Training Details](#training-details)
-- [Research Applications](#-research-applications)
 - [FAQ](#-faq)
 - [Citation](#citation)
 
@@ -218,7 +217,7 @@ print(f"Output shape: {outputs.last_hidden_state.shape}")
 
 ### Training Recipe: Cascading Annealed Language Learning
 
-MMBERT introduces novel training techniques:
+mmBERT introduces novel training techniques:
 
 1. **Inverse Masking Schedule**: Start with 30% masking, gradually reduce to 5%
 2. **Language Progression**: 60 → 110 → 1833 languages across training phases  
@@ -260,16 +259,16 @@ MMBERT introduces novel training techniques:
 
 ## ❓ FAQ
 
-**Q: How does MMBERT compare to XLM-R?**
-**A:** MMBERT significantly outperforms XLM-R across all benchmarks:
+**Q: How does mmBERT compare to XLM-R?**
+**A:** mmBERT significantly outperforms XLM-R across all benchmarks:
 - +2.4 points average on XTREME 
 - +3.0 points on GLUE
 - 16x more languages (1833 vs 100)
 - 16x longer context (8K vs 512 tokens)
 - 2-4x faster inference
 
-**Q: Which languages does MMBERT support?**
-**A:** MMBERT supports 1833 languages and scripts from FineWeb2, including:
+**Q: Which languages does mmBERT support?**
+**A:** mmBERT supports 1833 languages and scripts from FineWeb2, including:
 - All major world languages (English, Chinese, Spanish, etc.)
 - European languages (including low-resource ones like Faroese)
 - African languages (Swahili, Amharic, etc.)
@@ -283,8 +282,8 @@ MMBERT introduces novel training techniques:
 3. Add 1723 low-resource languages (decay phase)
 This allows efficient learning without overfitting on low-resource data.
 
-**Q: Can I fine-tune MMBERT for my specific task?**
-**A:** Yes! MMBERT works as a drop-in replacement for XLM-R:
+**Q: Can I fine-tune mmBERT for my specific task?**
+**A:** Yes! mmBERT works as a drop-in replacement for XLM-R:
 ```python
 from transformers import AutoModel, AutoTokenizer
 
@@ -296,7 +295,7 @@ tokenizer = AutoTokenizer.from_pretrained("jhu-clsp/mmbert-base")
 ```
 
 **Q: What about efficiency and memory requirements?**
-**A:** MMBERT is significantly more efficient:
+**A:** mmBERT is significantly more efficient:
 - 2-4x faster inference than XLM-R
 - Flash Attention 2 reduces memory usage for long sequences
 - Support for variable-length batching
@@ -305,30 +304,26 @@ tokenizer = AutoTokenizer.from_pretrained("jhu-clsp/mmbert-base")
 **Q: How do I access the training data and checkpoints?**
 **A:** All data and checkpoints are publicly available:
 - Training data: [jhu-clsp/mmbert-pretraining-data](https://huggingface.co/datasets/jhu-clsp/mmbert-pretraining-data)
-- Checkpoints: Available through model repositories with git tags
-- Training code: [GitHub repository](https://github.com/jhu-clsp/mmBERT)
+- Checkpoints: [jhu-clsp/mmbert-checkpoints](https://huggingface.co/models/jhu-clsp/mmbert-checkpoints)
+- Github code: [GitHub repository](https://github.com/jhu-clsp/mmBERT)
+- Data processing code: [Same as Ettin models](https://github.com/jhu-clsp/ettin-encoder-vs-decoder)
 
 ## Limitations
 
 - Structured prediction tasks (NER, POS) show slightly lower performance due to tokenizer prefix space handling
 - Very low-resource languages still have limited training data
-- High-quality educational content filtering could benefit more languages
+- High-quality educational content filtering could benefit from more languages
 
 ## Citation
 
-If you use MMBERT models in your research, please cite our work:
+If you use mmBERT models in your research, please cite our work:
 
 ```bibtex
 @misc{marone2025mmbert,
-    title={MMBERT: A Modern Multilingual Encoder with Annealed Language Learning}, 
+    title={mmBERT: A Modern Multilingual Encoder with Annealed Language Learning}, 
     author={Marc Marone and Orion Weller and William Fleshman and Eugene Yang and Dawn Lawrie and Benjamin Van Durme},
     year={2025},
-    eprint={2507.11412},
     archivePrefix={arXiv},
     primaryClass={cs.CL},
-    url={https://arxiv.org/abs/2507.11412}, 
 }
 ```
-
-**Acknowledgments**: This work was supported by DARPA SciFy and NSF Grant 2204926. We thank the open-source community for the datasets and tools that made this work possible.
-"""
