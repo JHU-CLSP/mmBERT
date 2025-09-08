@@ -4,7 +4,7 @@
 [![Paper](https://img.shields.io/badge/Paper-Arxiv-red)](https://arxiv.org/abs/2507.11412)
 [![mmBERT Collection](https://img.shields.io/badge/🤗%20Hugging%20Face-2%20Models-blue)](https://huggingface.co/collections/jhu-clsp/mmbert-a-modern-multilingual-encoder-68b725831d7c6e3acc435ed4)
 
-> 🌍 **TL;DR**: State-of-the-art multilingual encoder models trained on 3T tokens across 1833 languages with novel annealed language learning. Outperforms XLM-R and beats OpenAI o3 and Gemini 2.5 Pro on low-resource languages.
+> 🌍 **TL;DR**: State-of-the-art multilingual encoder models trained on 3T tokens across 1833 languages with novel annealed language learning. Outperforms XLM-R and can even beat OpenAI's o3 and Google's Gemini 2.5 Pro.
 
 📄 [Paper](https://arxiv.org/abs/2507.11412) | 🤗 [Model Collection](https://huggingface.co/collections/jhu-clsp/mmbert-a-modern-multilingual-encoder-68b725831d7c6e3acc435ed4) | 📊 [Training Data](https://huggingface.co/datasets/jhu-clsp/mmbert-pretrain-p1-fineweb2-langs)
 
@@ -280,6 +280,7 @@ mmBERT introduces novel training techniques:
 1. Start with 60 high-resource languages (pre-training)
 2. Add 50 mid-resource languages (mid-training) 
 3. Add 1723 low-resource languages (decay phase)
+
 This allows efficient learning without overfitting on low-resource data.
 
 **Q: Can I fine-tune mmBERT for my specific task?**
@@ -310,7 +311,7 @@ tokenizer = AutoTokenizer.from_pretrained("jhu-clsp/mmbert-base")
 
 ## Limitations
 
-- Structured prediction tasks (NER, POS) show slightly lower performance due to tokenizer prefix space handling
+- Structured prediction tasks (NER, POS) show slightly lower scores due to tokenizer prefix space handling
 - Very low-resource languages still have limited training data
 - High-quality educational content filtering could benefit from more languages
 
