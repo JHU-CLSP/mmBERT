@@ -1,12 +1,12 @@
 # mmBERT: A Modern Multilingual Encoder with Annealed Language Learning
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Paper](https://img.shields.io/badge/Paper-Arxiv-red)](https://arxiv.org/abs/2507.11412)
+[![Paper](https://img.shields.io/badge/Paper-Arxiv-red)](https://arxiv.org/abs/2509.06888)
 [![mmBERT Collection](https://img.shields.io/badge/🤗%20Hugging%20Face-2%20Models-blue)](https://huggingface.co/collections/jhu-clsp/mmbert-a-modern-multilingual-encoder-68b725831d7c6e3acc435ed4)
 
 > 🌍 **TL;DR**: State-of-the-art multilingual encoder models trained on 3T tokens across 1833 languages with novel annealed language learning. Outperforms XLM-R and can even beat OpenAI's o3 and Google's Gemini 2.5 Pro.
 
-📄 [Paper](https://arxiv.org/abs/2507.11412) | 🤗 [Model Collection](https://huggingface.co/collections/jhu-clsp/mmbert-a-modern-multilingual-encoder-68b725831d7c6e3acc435ed4) | 📊 [Training Data](https://huggingface.co/datasets/jhu-clsp/mmbert-pretrain-p1-fineweb2-langs)
+📄 [Paper](https://arxiv.org/abs/2509.06888) | 🤗 [Model Collection](https://huggingface.co/collections/jhu-clsp/mmbert-a-modern-multilingual-encoder-68b725831d7c6e3acc435ed4) | 📊 [Training Data](https://huggingface.co/datasets/jhu-clsp/mmbert-pretrain-p1-fineweb2-langs)
 
 mmBERT introduces the first modern multilingual encoder trained with cascading annealed language learning (ALL), progressively incorporating 1833 languages during training. With novel inverse masking schedules and high-quality multilingual data, mmBERT significantly outperforms previous multilingual encoders while achieving remarkable efficiency improvements (up to 4x faster).
 
@@ -320,11 +320,13 @@ tokenizer = AutoTokenizer.from_pretrained("jhu-clsp/mmbert-base")
 If you use mmBERT models in your research, please cite our work:
 
 ```bibtex
-@misc{marone2025mmbert,
-    title={mmBERT: A Modern Multilingual Encoder with Annealed Language Learning}, 
-    author={Marc Marone and Orion Weller and William Fleshman and Eugene Yang and Dawn Lawrie and Benjamin Van Durme},
-    year={2025},
-    archivePrefix={arXiv},
-    primaryClass={cs.CL},
+@misc{marone2025mmbertmodernmultilingualencoder,
+      title={mmBERT: A Modern Multilingual Encoder with Annealed Language Learning}, 
+      author={Marc Marone and Orion Weller and William Fleshman and Eugene Yang and Dawn Lawrie and Benjamin Van Durme},
+      year={2025},
+      eprint={2509.06888},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2509.06888}, 
 }
 ```
