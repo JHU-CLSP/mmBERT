@@ -14,7 +14,8 @@ mmBERT introduces the first modern multilingual encoder trained with cascading a
 - [Quick Start](#-quick-start)
 - [Model Family](#-model-family)
 - [Getting Started](#-getting-started)
-- [Training and Evaluation](#-training-and-evaluation)
+- [Training](#evaluation)
+- [Evaluation](#evaluation)
 - [Training Details](#training-details)
 - [FAQ](#-faq)
 - [Citation](#citation)
@@ -213,7 +214,9 @@ print(f"Output shape: {outputs.last_hidden_state.shape}")
 
 </details>
 
-## 📋 Training and Evaluation
+## 📋 Training
+
+Using 8xH100s, training took approximately 10 days for mmBERT-small and 40 days for mmBERT-base. 
 
 ### Training Recipe: Cascading Annealed Language Learning
 
@@ -256,6 +259,13 @@ mmBERT introduces novel training techniques:
 1. **Base Pre-training**: 60 languages, 30% masking, learning rate warmup
 2. **Context Extension**: 110 languages, 15% masking, extended context to 8K
 3. **Decay Phase**: 1833 languages, 5% masking, high-quality data focus
+
+## Evaluation
+Evaluation code for retrieval tasks is the same as [Ettin](https://github.com/JHU-CLSP/ettin-encoder-vs-decoder/tree/main/retrieval_eval).
+
+Evaluation code for efficiency is taken from the [ModernBERT](https://github.com/AnswerDotAI/ModernBERT/tree/main/efficiency) repo. 
+
+Evaluation code for NLU tasks is based on the [mGTE codebase](https://github.com/izhx/nlu-evals) and our fork will be uploaded soon. Please raise an issue or message us if this would be helpful for you.
 
 ## ❓ FAQ
 
