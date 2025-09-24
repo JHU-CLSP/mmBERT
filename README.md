@@ -314,7 +314,7 @@ tokenizer = AutoTokenizer.from_pretrained("jhu-clsp/mmbert-base")
 
 **Q: How do I access the training data and checkpoints?**
 **A:** All data and checkpoints are publicly available:
-- Training data: [jhu-clsp/mmbert-pretraining-data](https://huggingface.co/datasets/jhu-clsp/mmbert-pretraining-data)
+- Training data: [jhu-clsp/mmbert-pretraining-data](https://huggingface.co/datasets/jhu-clsp/mmBERT-pretrain-p1-fineweb2-langs)
 - Checkpoints: [jhu-clsp/mmbert-checkpoints](https://huggingface.co/models/jhu-clsp/mmbert-checkpoints)
 - Github code: [GitHub repository](https://github.com/jhu-clsp/mmBERT)
 - Data processing code: [Same as Ettin models](https://github.com/jhu-clsp/ettin-encoder-vs-decoder)
