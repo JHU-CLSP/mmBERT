@@ -1,0 +1,125 @@
+seed: 12345
+precision: amp_bf16
+autoresume: true
+
+save_folder: <s3_or_local_path_here>
+load_path: <path_to_checkpoint_if_resuming>
+
+save_interval: 10000000000tok
+save_num_checkpoints_to_keep: 10
+max_duration: 2900000000000tok
+eval_interval: 100000000000ba
+log_to_console: true
+console_log_interval: 25ba
+
+model:
+  name: flex_bert
+  pretrained_model_name: bert-base-uncased # unused
+  tokenizer_name: google/gemma-2-9b
+  disable_train_metrics: false
+  model_config:
+    num_hidden_layers: 22
+    hidden_size: 384
+    intermediate_size: 1152
+    num_attention_heads: 6
+    vocab_size: 256000
+    padding: unpadded
+    mlp_layer: glu
+    bert_layer: prenorm
+    embed_norm: true
+    final_norm: true
+    hidden_act: gelu
+    init_method: full_megatron
+    mlp_in_bias: false
+    mlp_out_bias: false
+    attn_out_bias: false
+    attn_qkv_bias: false
+    compile_model: true
+    head_pred_act: gelu
+    loss_function: fa_cross_entropy
+    normalization: layernorm
+    rotary_emb_dim: null
+    sliding_window: 128
+    attention_layer: rope
+    embedding_layer: sans_pos
+    rotary_emb_base: 160000
+    mlp_dropout_prob: 0
+    unpad_embeddings: true
+    masked_prediction: true
+    embed_dropout_prob: 0
+    skip_first_prenorm: true
+    activation_function: gelu
+    attn_out_dropout_prob: 0.1
+    rotary_emb_scale_base: null
+    rotary_emb_interleaved: false
+    allow_embedding_resizing: true
+    global_attn_every_n_layers: 3
+    local_attn_rotary_emb_base: 160000
+    attention_probs_dropout_prob: 0
+    norm_kwargs:
+      eps: 1.0e-05
+      bias: false
+    loss_kwargs:
+      reduction: mean
+
+optimizer:
+  name: decoupled_stableadamw
+  lr: 0.0004
+  eps: 1.0e-08
+  betas: [0.9, 0.95]
+  weight_decay: 4.0e-05
+  log_grad_norm: true
+  filter_bias_norm_wd: true
+
+scheduler:
+  name: warmup_stable_decay
+  alpha_f: 0.02
+  t_warmup: 0tok
+  t_decay: 0tok
+
+train_loader:
+  name: text
+  dataset:
+    local: <dataset_path_here>
+    split: train
+    remote: null
+    shuffle: true
+    streaming: false
+    max_seq_len: 8192
+    shuffle_seed: 12345
+    tokenizer_name: google/gemma-2-9b
+    mlm_probability: 0.15
+  drop_last: true
+  num_workers: 12
+  bos_token_id: 2
+  eos_token_id: 1
+  pad_token_id: 0
+  sep_token_id: 1
+  mask_token_id: 4
+  sequence_packing: true
+  batch_size_warmup_tokens: 0tok
+  batch_size_warmup_min_size: 48
+
+device_train_microbatch_size: 8
+global_train_batch_size: 4608
+device_eval_batch_size: 16
+global_eval_batch_size: 1024
+
+# loggers:
+#   wandb:
+#     name: <wandb_name>
+#     group: <group_name>
+#     entity: <entity_name>
+#     project: <project_name>
+#     tags: ["ext", "other tags here"]
+
+callbacks:
+  lr_monitor: {}
+  scheduled_gc: {}
+  log_grad_norm:
+    batch_log_interval: 100
+  speed_monitor:
+    window_size: 100
+  runtime_estimator: {}
+  packing_efficiency:
+    log_interval: 100
